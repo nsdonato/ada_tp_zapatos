@@ -1,24 +1,3 @@
-// A partir de la siguiente lista de productos, 
-// hacer una web siguiendo el maquetado de ejemplo. 
-
-// Al escribir en el input el color o el tipo de un producto, 
-// se deben filtrar los productos. 
-// Funciona tanto apretando enter como haciendo clic en el boton. 
-
-/*
-#### CONSIGNA ####
-
-- Maquetar una web siguiendo la imagen de ejemplo
-- El objeto ya esta creado en el archivo .js
-- Esta prohibido usar for. Para recorrer el objeto, debemos usar forEach, map, filter, o cualquier otro método  de arrays. Para recorrer colecciones de HTML (por ejemplo, las que nos devuelve document.getElementsByClassName) si necesitaremos for.
-- El filtro debe funcionar tanto cuando el usuario aprieta enter, como cuando aprieta el boton de "filtrar".
-- El filtro debe funcionar por color o por tipo, no es necesario que funcione con ambos a la vez.
-- Si el campo está vacío, se deben devolver todos los productos.
-- Si ningun producto cumple la busqueda (por ejemplo "verde") no se debe mostrar ningun producto.
-- No pasen mucho tiempo en el maquetado, dediquense a javascript.
-- Al final de la clase, subirlo a github y mandarme link O LAS PERSEGUIRE UNA POR UNA PARA QUE LO HAGAN
-
-*/
 const productos = [
   {
     nombre: 'Zapato negro',
@@ -47,3 +26,42 @@ const productos = [
   },
 ];
 
+const inputSearch = document.getElementById("inputSearch");
+const btnFilter = document.getElementById("btnFilter");
+const cardsContainer = document.getElementById("cards__container");
+
+const search = infoProduct => {
+  let filteredProducts = "";
+
+  filteredProducts = productos.reduce((previousValue, currentValue) => {
+
+    if (infoProduct === currentValue.tipo || infoProduct === currentValue.color || infoProduct === "") {
+
+      previousValue += `<div class="card">
+        <div class="card__img">
+          <img src="${currentValue.img}" alt="${currentValue.nombre}" />
+        </div>
+        <div class="card__footer">
+          <span>${currentValue.nombre}</span>
+        </div>
+      </div>`;
+    }
+
+    return previousValue;
+  }, '')
+
+  filteredProducts === "" ? cardsContainer.innerHTML = "" : cardsContainer.innerHTML = filteredProducts;
+};
+
+inputSearch.onkeyup = e => {
+  e.preventDefault();
+
+  if (e.keyCode === 13) {
+    search(e.target.value.toLowerCase());
+  }
+}
+
+btnFilter.onclick = e => {
+  e.preventDefault();
+  search(inputSearch.value.toLowerCase());
+}
