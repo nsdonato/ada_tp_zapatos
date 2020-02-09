@@ -19,3 +19,5 @@
 - No pasen mucho tiempo en el maquetado, dediquense a javascript.
 
 - Al final de la clase, subirlo a github y mandarme link O LAS PERSEGUIRE UNA POR UNA PARA QUE LO HAGAN
+
+GitHubPage: https://nsdonato.github.io/ada_tp_zapatos/
